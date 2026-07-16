@@ -1,0 +1,141 @@
+{
+  "name": "Demo1",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -448,
+        -48
+      ],
+      "id": "098dcbac-d055-4b70-8398-17c75de80ba7",
+      "name": "When chat message received",
+      "webhookId": "fb90490d-0ae6-45b5-9f13-4f07f2bcf084"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -160,
+        -48
+      ],
+      "id": "d3f75ff3-a6c3-4792-a591-faa393c0a749",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.1-flash-lite",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        -320,
+        112
+      ],
+      "id": "ce04dc99-cdcf-4177-aa38-28da06e74324",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "aESRzolS4IEJV332",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 3
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        -160,
+        144
+      ],
+      "id": "7bff0978-3385-4255-bbd8-76a5237abfd2",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get the latest blog posts about any RSS feed",
+        "url": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('URL', `BBC World (Global headlines)\nhttps://feeds.bbci.co.uk/news/world/rss.xml\n\nAl Jazeera English (In-depth global coverage)\nhttps://www.aljazeera.com/xml/rss/all.xml\n\nCNN World (Breaking news worldwide)\nhttp://rss.cnn.com/rss/edition_world.rss\n\nTechCrunch (Global tech & startup news)\nhttps://techcrunch.com/feed/\n\nHacker News (Tech community headlines)\nhttp://news.ycombinator.com/rss\n\nn8n Blog (Updates & tutorials)\nhttps://n8n.io/blog/rss\n\nBon Appétit (Recent recipes list)\nhttps://www.bonappetit.com/feed/recipes-rss-feed/rss\n\nENDS Report (Environmental law & policy news)\nhttps://www.endsreport.com/rss/news-and-analysis\n\nMedlinePlus (Health topics & wellness updates)\nhttps://medlineplus.gov/groupfeeds/new.xml\n\nESPN (Sports news)\nhttp://sports.espn.go.com/espn/rss/news\n\nESPN Cricinfo Live (Live cricket scores)\nhttps://www.espncricinfo.com/rss/livescores.xml\n\nESPN Cricinfo News (Cricket news & stories)\nhttps://www.espncricinfo.com/rss/content/story/feeds/0.xml`, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedReadTool",
+      "typeVersion": 1.2,
+      "position": [
+        80,
+        128
+      ],
+      "id": "bad6a3ef-d2ae-4f5b-a8a0-837339dffaa7",
+      "name": "get name"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get name": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "3f9e9284-2a82-4279-a52e-d88b767ea6f9",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "1128b8a3f866cb62a33fb33b729418b692727cb502c986d7f885338d5f1c4659"
+  },
+  "nodeGroups": [],
+  "id": "Sysa55uEUJaAT6Ek",
+  "tags": []
+}
